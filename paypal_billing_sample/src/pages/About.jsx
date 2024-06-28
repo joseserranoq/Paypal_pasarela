@@ -1,19 +1,21 @@
-import React from 'react'
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import React from 'react';
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { Checkout } from '../Checkout';
 
 export const About = () => {
-  
-    const initialOptions = {
-      clientId: 'Aa2vQLMVpJE_Mvq3D1iaOv72Nm2mc5FiXgIyGxJhHHkLCLwQ9pB1pq_b6hfBVaGTyoRW_zfnEy5mTXxS',
-      // Add other options as needed
-    };
-    return (
-      <>
-        <div className="App">           
-          <PayPalScriptProvider options={initialOptions}>
-              <PayPalButtons />
-          </PayPalScriptProvider>
-        </div>
-      </>
-    )
-    }
+  const cliend_id = import.meta.env.VITE_CLIENT_ID;
+  // Ensure the environment variable is prefixed with REACT_APP_
+  const initialOptions = {
+    clientId: cliend_id,
+    currency: "USD",
+    intent: "capture",
+  };
+
+  return (
+    <div className="App">
+      <PayPalScriptProvider options={initialOptions}>
+        <PayPalButtons />
+      </PayPalScriptProvider>
+    </div>
+  );
+};
